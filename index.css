@@ -1,0 +1,72 @@
+body {
+  position: relative;
+}
+
+.zoom-wrap {
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+  height: 150px;
+  left: 150px;
+  position: relative;
+  top: 150px;
+  width: 150px;
+}
+
+.zoom-anchor {
+  background: #aaa;
+  height: 10px;
+  position: absolute;
+  width: 10px;
+}
+
+.zoom-nw {
+  cursor: nwse-resize;
+  left: -5px;
+  top: -5px;
+}
+
+.zoom-n {
+  cursor: ns-resize;
+  left: 50%;
+  transform: translateX(-50%);
+  top: -5px;
+}
+
+.zoom-ne {
+  cursor: nesw-resize;
+  right: -5px;
+  top: -5px;
+}
+
+.zoom-e {
+  cursor: ew-resize;
+  right: -5px;
+  transform: translateY(-50%);
+  top: 50%;
+}
+
+.zoom-se {
+  bottom: -5px;
+  cursor: nwse-resize;
+  right: -5px;
+}
+
+.zoom-s {
+  bottom: -5px;
+  cursor: ns-resize;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.zoom-sw {
+  cursor: nesw-resize;
+  left: -5px;
+  bottom: -5px;
+}
+
+.zoom-w {
+  cursor: ew-resize;
+  left: -5px;
+  transform: translateY(-50%);
+  top: 50%;
+}
