@@ -2,6 +2,8 @@
 
   原生JS实现的8点拖拽缩放系统。
 
+  [demo](http://blog.0xfc.cn/2016/03/20/eight-dot-zoom/)
+
 ### 详情
   使页面中的任何元素都可以实现拖拽缩放的功能，只要在HTML属性中添加eight-dot-zoom即可。支持IE8以上现代浏览器。
   
