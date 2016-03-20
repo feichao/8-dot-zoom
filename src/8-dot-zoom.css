@@ -34,7 +34,7 @@ body {
 .zoom-n {
   cursor: ns-resize;
   left: 50%;
-  transform: translateX(-50%);
+  margin-left: -5px;
   top: -5px;
 }
 
@@ -47,7 +47,7 @@ body {
 .zoom-e {
   cursor: ew-resize;
   right: -5px;
-  transform: translateY(-50%);
+  margin-top: -5px;
   top: 50%;
 }
 
@@ -61,7 +61,7 @@ body {
   bottom: -5px;
   cursor: ns-resize;
   left: 50%;
-  transform: translateX(-50%);
+  margin-left: -5px;
 }
 
 .zoom-sw {
@@ -73,6 +73,6 @@ body {
 .zoom-w {
   cursor: ew-resize;
   left: -5px;
-  transform: translateY(-50%);
+  margin-top: -5px;
   top: 50%;
 }

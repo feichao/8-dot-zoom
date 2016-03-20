@@ -57,10 +57,43 @@
       this.zoomWrapElement = zoomWrap;
     },
     resetPosition: function() {
-      this.currentZoomElement.style.left = this.zoomWrapElement.style.left = this.currentPosition.left;
-      this.currentZoomElement.style.top = this.zoomWrapElement.style.top = this.currentPosition.top;
-      this.currentZoomElement.style.height = this.zoomWrapElement.style.height = this.currentPosition.height;
-      this.currentZoomElement.style.width = this.zoomWrapElement.style.width = this.currentPosition.width;
+      if(this.currentPosition.left < this.demarcationNew.left) {
+        this.currentPosition.left = this.demarcationNew.left;
+      }
+
+      if(this.currentPosition.top < this.demarcationNew.top) {
+        this.currentPosition.top =  this.demarcationNew.top;
+      }
+
+      if(this.currentPosition.left + this.currentPosition.width > this.demarcationNew.left + this.demarcationNew.width) {
+        this.currentPosition.left = this.demarcationNew.width + this.demarcationNew.left - this.currentPosition.width; 
+      }
+
+      if(this.currentPosition.top + this.currentPosition.height > this.demarcationNew.top + this.demarcationNew.height) {
+        this.currentPosition.top = this.demarcationNew.height + this.demarcationNew.top - this.currentPosition.height; 
+      }
+
+      if(this.currentPosition.width > this.demarcationNew.width) {
+        this.currentPosition.width = this.demarcationNew.width;
+      }
+
+      if(this.currentPosition.height > this.demarcationNew.height) {
+        this.currentPosition.height =  this.demarcationNew.height;
+      }
+
+      this.currentZoomElement.style.left = this.zoomWrapElement.style.left = this.currentPosition.left + 'px';
+      this.currentZoomElement.style.top = this.zoomWrapElement.style.top = this.currentPosition.top + 'px';
+      this.currentZoomElement.style.height = this.zoomWrapElement.style.height = this.currentPosition.height + 'px';
+      this.currentZoomElement.style.width = this.zoomWrapElement.style.width = this.currentPosition.width + 'px';
+    },
+    resetWrapElement: function() {
+      var parentNode = this.currentZoomElement.parentNode;
+      var style = getComputedStyle(parentNode);
+      while(parentNode && style.position !== 'relative' && style.position !== 'absolute' && parentNode !== document.body) {
+        parentNode = parentNode.parentNode;
+        style = getComputedStyle(parentNode);
+      }
+      parentNode.appendChild(this.zoomWrapElement);
     },
     isElementMove: function() {
       return this.isMoveFlag.leftRight || this.isMoveFlag.upDown || this.isMoveFlag.reverseUpDown || this.isMoveFlag.reverseLeftRight ||
@@ -68,6 +101,8 @@
     },
     onElementMouseDown: function(event) {
       var target = event.target;
+      var dataSet = target.dataset || {};
+      this.demarcation = this.demarcation || {};
 
       this.currentZoomElement = target;
       this.startPoint = {
@@ -84,6 +119,15 @@
       };
 
       this.isMoveFlag.isMoving = true;
+
+      this.demarcationNew = {
+        top: +(dataSet.top || this.demarcation.top || undefined),
+        left: +(dataSet.left || this.demarcation.left || undefined),
+        height: +(dataSet.height || this.demarcation.height || undefined),
+        width: +(dataSet.width || this.demarcation.width || undefined)
+      };
+
+      this.resetWrapElement();
 
       this.resetPosition();
     },
@@ -179,5 +223,7 @@
   doc.addEventListener('mousedown', eightZoomSys.onMouseDown.bind(eightZoomSys));
   doc.addEventListener('mousemove', eightZoomSys.onMouseMove.bind(eightZoomSys));
   doc.addEventListener('mouseup', eightZoomSys.onMouseUp.bind(eightZoomSys));
+
+  global.EightZoomSys = eightZoomSys;
 
 })(window, document);
