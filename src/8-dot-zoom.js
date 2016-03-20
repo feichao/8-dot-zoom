@@ -5,6 +5,7 @@
     zoomElements: [],
     zoomWrapElement: undefined,
     currentZoomElement: undefined,
+    currentZoomParentElement: undefined,
     isElementMove: false,
     startPoint: {
       x: 0,
@@ -57,6 +58,7 @@
       this.zoomWrapElement = zoomWrap;
     },
     resetPosition: function() {
+
       if(this.currentPosition.left < this.demarcationNew.left) {
         this.currentPosition.left = this.demarcationNew.left;
       }
@@ -94,6 +96,8 @@
         style = getComputedStyle(parentNode);
       }
       parentNode.appendChild(this.zoomWrapElement);
+
+      this.currentZoomParentElement = parentNode;
     },
     isElementMove: function() {
       return this.isMoveFlag.leftRight || this.isMoveFlag.upDown || this.isMoveFlag.reverseUpDown || this.isMoveFlag.reverseLeftRight ||
@@ -111,6 +115,7 @@
       };
 
       this.currentZoomElement.style.position = 'absolute';
+
       this.currentPosition = {
         top: target.offsetTop,
         left: target.offsetLeft,
@@ -123,15 +128,15 @@
       if(this.demarcation === 'parent') {
         var parent = target.parentNode;
         this.demarcationNew = {
-          top: +(dataSet.top || parent.offsetTop || 0),
-          left: +(dataSet.left || parent.offsetLeft || 0),
+          top: 0,
+          left: 0,
           height: +(dataSet.height || parent.offsetHeight || undefined),
           width: +(dataSet.width || parent.offsetWidth || undefined)
         };
       } else if (this.demarcation instanceof Element){
         this.demarcationNew = {
-          top: +(dataSet.top || this.demarcation.offsetTop || 0),
-          left: +(dataSet.left || this.demarcation.offsetLeft || 0),
+          top: 0,
+          left: 0,
           height: +(dataSet.height || this.demarcation.offsetHeight || undefined),
           width: +(dataSet.width || this.demarcation.offsetWidth || undefined)
         };
@@ -144,10 +149,7 @@
         };
       }
 
-      
-
       this.resetWrapElement();
-
       this.resetPosition();
     },
     onMouseDown: function(event) {

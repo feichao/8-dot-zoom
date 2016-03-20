@@ -7,7 +7,7 @@ body {
 }
 
 .zoom-wrap {
-  border: 1px solid #ddd;
+  border: 1px dashed #ddd;
   box-sizing: border-box;
   cursor: move;
   display: none;
@@ -20,6 +20,7 @@ body {
 
 .zoom-anchor {
   background: #aaa;
+  border-radius: 1px;
   height: 10px;
   position: absolute;
   width: 10px;
