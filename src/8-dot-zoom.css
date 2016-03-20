@@ -2,12 +2,18 @@ body {
   position: relative;
 }
 
+[eight-dot-zoom] {
+  width: 100%;
+}
+
 .zoom-wrap {
   border: 1px solid #ddd;
   box-sizing: border-box;
+  cursor: move;
+  display: none;
   height: 150px;
   left: 150px;
-  position: relative;
+  position: absolute;
   top: 150px;
   width: 150px;
 }
