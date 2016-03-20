@@ -120,12 +120,31 @@
 
       this.isMoveFlag.isMoving = true;
 
-      this.demarcationNew = {
-        top: +(dataSet.top || this.demarcation.top || undefined),
-        left: +(dataSet.left || this.demarcation.left || undefined),
-        height: +(dataSet.height || this.demarcation.height || undefined),
-        width: +(dataSet.width || this.demarcation.width || undefined)
-      };
+      if(this.demarcation === 'parent') {
+        var parent = target.parentNode;
+        this.demarcationNew = {
+          top: +(dataSet.top || parent.offsetTop || 0),
+          left: +(dataSet.left || parent.offsetLeft || 0),
+          height: +(dataSet.height || parent.offsetHeight || undefined),
+          width: +(dataSet.width || parent.offsetWidth || undefined)
+        };
+      } else if (this.demarcation instanceof Element){
+        this.demarcationNew = {
+          top: +(dataSet.top || this.demarcation.offsetTop || 0),
+          left: +(dataSet.left || this.demarcation.offsetLeft || 0),
+          height: +(dataSet.height || this.demarcation.offsetHeight || undefined),
+          width: +(dataSet.width || this.demarcation.offsetWidth || undefined)
+        };
+      } else {
+        this.demarcationNew = {
+          top: +(dataSet.top || this.demarcation.top || undefined),
+          left: +(dataSet.left || this.demarcation.left || undefined),
+          height: +(dataSet.height || this.demarcation.height || undefined),
+          width: +(dataSet.width || this.demarcation.width || undefined)
+        };
+      }
+
+      
 
       this.resetWrapElement();
 

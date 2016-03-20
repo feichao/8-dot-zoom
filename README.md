@@ -13,7 +13,13 @@
 <img src="..." eight-dot-zoom/>
 ```
    3. 引用完8-dot-zoom.js后可以使用下述方式指出拖拽边界：
+
 ```javascript
+//指定拖拽元素的父元素的位置信息为其边界
+window.EightZoomSys.demarcation = 'parent';
+//指定某一元素的位置信息为其边界
+window.EightZoomSys.demarcation = Element;
+//直接指定边界
 window.EightZoomSys.demarcation = {
     top: 100,
     left: 100,
